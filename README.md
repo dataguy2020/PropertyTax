@@ -5,6 +5,7 @@ This script is set up to pull public avaiable data for the community of Tanyard 
 * Clean- up functions
 * Calculate property taxes that are due in a annual payment setup
 * Calculate property taxes that are due in a semi annual payment setup
+* Expand the script to include the rest of Anne Arundel County
 * Expand the script to include Baltimore City, Baltimore County, Howard County, Calvert County, Kent County, Prince George's, Queen Anne's and Talbot
 * Expand the script to include the rest of the Eastern Shore
 * Expand the script to include western Maryland Counties

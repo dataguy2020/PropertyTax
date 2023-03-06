@@ -97,28 +97,6 @@ cleandata['owneroccupancycode'] = cleandata['owneroccupancycode'].apply(ownerocc
 cleandata['homesteadcreditqualificationcode'] = cleandata['homesteadcreditqualificationcode'].apply(
     homesteadqualiticationcondition)
 
-#Formatting to Monetary numbers
-#cleandata["currentyeartotalassessment"] = cleandata["currentyeartotalassessment"].apply(
-#    lambda x: format_currency(x, currency="USD", locale="en_US"))
-#cleandata["box2"] = cleandata["box2"].apply(
-#    lambda x: format_currency(x, currency="USD", locale="en_US"))
-#cleandata["box4"] = cleandata["box4"].apply(
-#    lambda x: format_currency(x, currency="USD", locale="en_US"))
-#cleandata["box5"] = cleandata["box6"].apply(
-#    lambda x: format_currency(x, currency="USD", locale="en_US"))
-#cleandata["box6"] = cleandata["box6"].apply(
-#    lambda x: format_currency(x, currency="USD", locale="en_US"))
-#cleandata["box7"] = cleandata["box7"].apply(
-#    lambda x: format_currency(x, currency="USD", locale="en_US"))
-#cleandata["box8"] = cleandata["box8"].apply(
-#    lambda x: format_currency(x, currency="USD", locale="en_US"))
-#cleandata["box9"] = cleandata["box9"].apply(
-#    lambda x: format_currency(x, currency="USD", locale="en_US"))
-#cleandata["box10"] = cleandata["box10"].apply(
-#    lambda x: format_currency(x, currency="USD", locale="en_US"))
-#cleandata["totalchange"] = cleandata["totalchange"].apply(
-#    lambda x: format_currency(x, currency="USD", locale="en_US"))
-
 #Removing bad data points
 #These are common areas or open areas that are not owned by a resident but by the Association
 cleandata = cleandata.drop(60590243392)

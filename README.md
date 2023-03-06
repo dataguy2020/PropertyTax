@@ -6,10 +6,12 @@ This script is set up to pull public avaiable data for the community of Tanyard 
 * Calculate property taxes that are due in a annual payment setup
 * Calculate property taxes that are due in a semi annual payment setup
 * Expand the script to include the rest of Anne Arundel County
-* Expand the script to include Baltimore City, Baltimore County, Howard County, Calvert County, Kent County, Prince George's, Queen Anne's and Talbot
-* Expand the script to include the rest of the Eastern Shore
-* Expand the script to include western Maryland Counties
-* Expand the script to include the rest of Maryland Counties that are not listed
+* Expand the script to include Counties that border AA (Baltimore City, Baltimore County, Howard County, Calvert County, Prince George's, Queen Anne's)
+* Expand the script to include the rest of the Eastern Shore (Caroline, Cecil, Dorchester, Kent, Somerset, Tablot, Wicomico, Worcester)
+* Expand the script to include the rest of Central Maryland (Carroll, Harford)
+* Expand the script to include western Maryland Counties (Washington, Allegany, Garrett)
+* Expand the script to include the DC Metro Countries (Fredrick, Montgomery)
+* Expand the script to include the Southern Maryland Counties (Calvert, Charles, St. Marys)
 
 # Notes
 * Under the two-payment plan, the local governments may add a service fee of up to 1.65% of the second payment to your tax bill. This amount is to compensate the local government for lost interest and additional administrative expenses of sending two tax bills. This fee will be added to the second payment.

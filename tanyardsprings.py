@@ -8,7 +8,6 @@ import datetime as dt
 
 from auth import applicationtoken
 from babel.numbers import format_currency
-#importing personal modules
 from functions import *
 import pandas as pd
 import seaborn as sns
@@ -30,7 +29,7 @@ results = client.get("q4mw-f34p", limit=3000)
 
 # Convert to pandas DataFrame
 results_df = pd.DataFrame.from_records(results)
-results_df.to_csv('results_df.csv')
+results_df.to_csv('output/results_df.csv')
 
 #creating dataframe + adding first field from the originating data frame
 cleandata = results_df[['legal_description_line_2_mdp_field_legal2_sdat_field_18']].copy()
@@ -140,7 +139,7 @@ print(cleandata['yearbuilt'].value_counts().sort_index(0))
 
 
 #Saving to CSV
-cleandata.to_csv('cleandata.csv')
+cleandata.to_csv('output/cleandata.csv')
 
 #printing data frame to screen
 cleandata

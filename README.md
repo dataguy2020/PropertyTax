@@ -1,6 +1,8 @@
 # PropertyTax
 This script is set up to pull public avaiable data for the community of Tanyard Springs and to calculate the house assessment, the 2% and 10% caps allowed by Anne Arundel County & the State of Maryland, along with the property tax payment (yearly) that is needed for each of the homes. 
 
+You have will have to obtain your own personal authentication token from https://opendata.maryland.gov. There is an example auth.py.example. This file will need to be updated and then renamed to auth.py. 
+
 # TO DO
 * Clean- up functions
 * Calculate property taxes that are due in a annual payment setup

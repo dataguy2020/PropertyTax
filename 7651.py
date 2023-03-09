@@ -18,11 +18,15 @@ tanyardTH['year1countydifference'] = tanyardTH['box8'] - tanyardTH['year1countyl
 tanyardTH['year1statedifference'] = tanyardTH['box8'] - tanyardTH['year1statelimit']
 
 tanyardTH.loc[tanyardTH['year1countydifference'] < 0, 'year1countycredit'] = 0
-tanyardTH.loc[tanyardTH['year1countydifference'] > 0, 'year1countycredit'] = (tanyardTH['year1countydifference'] * annearundelrate) / 100
+tanyardTH.loc[tanyardTH['year1countydifference'] > 0, 'year1countycredit'] = (tanyardTH[
+                                                                                  'year1countydifference'] * annearundeltaxrate) / 100
 tanyardTH.loc[tanyardTH['year1statedifference'] < 0, 'year1statecredit'] = 0
-tanyardTH.loc[tanyardTH['year1statedifference'] > 0, 'year1statecredit'] = (tanyardTH['year1statedifference'] * annearundelrate) / 100
+tanyardTH.loc[tanyardTH['year1statedifference'] > 0, 'year1statecredit'] = (tanyardTH[
+                                                                                'year1statedifference'] * statetaxrate) / 100
 
-
+tanyardTH['year1countyrealestate'] = (tanyardTH['box8'] * annearundeltaxrate) / 100
+tanyardTH['year1staterealestate'] = (tanyardTH['box8'] * statetaxrate) / 100
+tanyardTH['year1total'] = tanyardTH['year1countyrealestate'] + tanyardTH['year1staterealestate']  - tanyardTH['year1countycredit'] - tanyardTH['year1statecredit'] + annearundelsolidwaste + annearundelstormwater
 
 # debugging
 print(tanyardTH.dtypes)

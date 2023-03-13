@@ -25,6 +25,7 @@ tanyardTH['year1staterealestate'] = (tanyardTH['box8'] * statetaxrate) / 100
 tanyardTH['year1total'] = tanyardTH['year1countyrealestate'] + tanyardTH['year1staterealestate']  - tanyardTH['year1countycredit'] - tanyardTH['year1statecredit'] + annearundelsolidwaste + annearundelstormwater
 
 tanyardTH['year2difference'] = tanyardTH['box9'] - tanyardTH['year1countylimit']
+tanyardTH['year2countylimit'] = tanyardTH['year1countylimit'] + (tanyardTH['year1countylimit'] * annearundelcountylimit)
 
 # debugging
 print(tanyardTH.dtypes)

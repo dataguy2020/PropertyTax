@@ -35,10 +35,22 @@ tanyardTH['year1total'] = tanyardTH['year1countyrealestate'] + tanyardTH['year1s
 tanyardTH['year2difference'] = tanyardTH['box9'] - tanyardTH['year1countylimit']
 tanyardTH['year2countylimit'] = tanyardTH['year1countylimit'] + (tanyardTH['year1countylimit'] * annearundelcountylimit)
 tanyardTH['year2statelmit'] = tanyardTH['box2'] + (tanyardTH['box2'] * statelimit)
+tanyardTH['year2countydifference'] = tanyardTH['box9'] - tanyardTH['year2countylimit']
+tanyardTH['year2statedifference'] = tanyardTH['box9'] - tanyardTH['year2statelmit']
 
 #year 2 county credit calculation
+tanyardTH.loc[tanyardTH['year2countydifference'] < 0, 'year2countycredit'] = 0
+tanyardTH.loc[tanyardTH['year2countydifference'] > 0, 'year2countycredit'] = (tanyardTH['year2countydifference'] * annearundeltaxrate) / 100
 
 #yeaer 2 state credit calculation
+tanyardTH.loc[tanyardTH['year2statedifference'] < 0, 'year2statecredit'] = 0
+tanyardTH.loc[tanyardTH['year2statedifference'] > 0, 'year2statecredit'] = (tanyardTH[ 'year2statedifference'] * statetaxrate) / 100
+
+#year 2 straight real estate tax payment without exempt class
+tanyardTH['year2countyrealestate'] = (tanyardTH['box9'] * annearundeltaxrate) / 100
+tanyardTH['year2staterealestate'] = (tanyardTH['box9'] * statetaxrate) / 100
+tanyardTH['year2total'] = tanyardTH['year2countyrealestate'] + tanyardTH['year2staterealestate']  - tanyardTH['year2countycredit'] - tanyardTH['year2statecredit'] + annearundelsolidwaste + annearundelstormwater
+
 
 # debugging
 print(tanyardTH.dtypes)

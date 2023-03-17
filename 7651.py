@@ -11,7 +11,7 @@ simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 
 tanyardTH = pd.read_csv('https://raw.githubusercontent.com/dataguy2020/PropertyTax/development/test/7651.csv')
 
-#year 1 calcualtion
+#year 1 calculation
 tanyardTH['year1difference'] = tanyardTH['box8'] - tanyardTH['box4']
 tanyardTH['year1countylimit'] = tanyardTH['box4'] + (tanyardTH['box4'] * annearundelcountylimit)
 tanyardTH['year1statelimit'] = tanyardTH['box4'] + (tanyardTH['box4'] * statelimit)
@@ -31,7 +31,7 @@ tanyardTH['year1countyrealestate'] = (tanyardTH['box8'] * annearundeltaxrate) / 
 tanyardTH['year1staterealestate'] = (tanyardTH['box8'] * statetaxrate) / 100
 tanyardTH['year1total'] = tanyardTH['year1countyrealestate'] + tanyardTH['year1staterealestate']  - tanyardTH['year1countycredit'] - tanyardTH['year1statecredit'] + annearundelsolidwaste + annearundelstormwater
 
-#year 2 calculations
+#year 2 calculation
 tanyardTH['year2difference'] = tanyardTH['box9'] - tanyardTH['year1countylimit']
 tanyardTH['year2countylimit'] = tanyardTH['year1countylimit'] + (tanyardTH['year1countylimit'] * annearundelcountylimit)
 tanyardTH['year2statelmit'] = tanyardTH['box2'] + (tanyardTH['box2'] * statelimit)
@@ -51,9 +51,20 @@ tanyardTH['year2countyrealestate'] = (tanyardTH['box9'] * annearundeltaxrate) / 
 tanyardTH['year2staterealestate'] = (tanyardTH['box9'] * statetaxrate) / 100
 tanyardTH['year2total'] = tanyardTH['year2countyrealestate'] + tanyardTH['year2staterealestate']  - tanyardTH['year2countycredit'] - tanyardTH['year2statecredit'] + annearundelsolidwaste + annearundelstormwater
 
+#year 3 calculation
+tanyardTH['year3difference'] = tanyardTH['box10'] - tanyardTH['year2countylimit']
+tanyardTH['year3countylimit'] = tanyardTH['year2countylimit'] + (tanyardTH['year2countylimit'] * annearundelcountylimit)
+tanyardTH['year3statelimit'] = tanyardTH['box9'] + (tanyardTH['box9'] * statelimit)
+
+
+#year 3 county credit calculation
+
+# year 3 state credit calculation
+
+#year3 straight real estate tax payment without exempt class
 
 # debugging
 print(tanyardTH.dtypes)
 print(tanyardTH)
 
-tanyardTH.to_csv('7651.csv')
+tanyardTH.to_csv('output/7651.csv')

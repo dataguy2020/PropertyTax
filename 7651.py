@@ -20,13 +20,11 @@ tanyardTH['year1statedifference'] = tanyardTH['box8'] - tanyardTH['year1statelim
 
 # year1 county credit calculation
 tanyardTH.loc[tanyardTH['year1countydifference'] < 0, 'year1countycredit'] = 0
-tanyardTH.loc[tanyardTH['year1countydifference'] > 0, 'year1countycredit'] = (tanyardTH[
-                                                                                  'year1countydifference'] * annearundeltaxrate) / 100
+tanyardTH.loc[tanyardTH['year1countydifference'] > 0, 'year1countycredit'] = (tanyardTH['year1countydifference'] * annearundeltaxrate) / 100
 
 # year 1 state credit calculation
 tanyardTH.loc[tanyardTH['year1statedifference'] < 0, 'year1statecredit'] = 0
-tanyardTH.loc[tanyardTH['year1statedifference'] > 0, 'year1statecredit'] = (tanyardTH[
-                                                                                'year1statedifference'] * statetaxrate) / 100
+tanyardTH.loc[tanyardTH['year1statedifference'] > 0, 'year1statecredit'] = (tanyardTH[ 'year1statedifference'] * statetaxrate) / 100
 
 # year 1 straight real estate tax payment without exempt class
 tanyardTH['year1countyrealestate'] = (tanyardTH['box8'] * annearundeltaxrate) / 100

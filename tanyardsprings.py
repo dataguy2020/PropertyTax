@@ -30,7 +30,7 @@ results = client.get("q4mw-f34p", limit=3000)
 
 # Convert to pandas DataFrame
 results_df = pd.DataFrame.from_records(results)
-results_df.to_csv('results_df.csv')
+results_df.to_csv('output/results_df.csv')
 
 #creating dataframe + adding first field from the originating data frame
 cleandata = results_df[['legal_description_line_2_mdp_field_legal2_sdat_field_18']].copy()
@@ -97,6 +97,7 @@ cleandata['owneroccupancycode'] = cleandata['owneroccupancycode'].apply(ownerocc
 cleandata['homesteadcreditqualificationcode'] = cleandata['homesteadcreditqualificationcode'].apply(
     homesteadqualiticationcondition)
 
+
 #Removing bad data points
 #These are common areas or open areas that are not owned by a resident but by the Association
 cleandata = cleandata.drop(60590243392)
@@ -122,14 +123,14 @@ cleandata.loc[cleandata["accountnumber"] == 60590254222, "housetype"] = "TH"
 cleandata.loc[cleandata["accountnumber"] == 60590254223, "housetype"] = "TH"
 cleandata.loc[cleandata["accountnumber"] == 60590254224, "housetype"] = "TH"
 
-#Updating year built 
+#Updating year built
 cleandata.loc[cleandata["accountnumber"] == 79790230860, "yearbuilt"] = "2011"
 cleandata.loc[cleandata["accountnumber"] == 79790230900, "yearbuilt"] = "2010"
 cleandata.loc[cleandata["accountnumber"] == 79790234258, "yearbuilt"] = "2013"
 
 cleandata['yearbuilt'] = cleandata['yearbuilt'].apply(yearcondition)
 
-#Debugging to see number of unique housetypes and how many 
+#Debugging to see number of unique housetypes and how many
 print(cleandata['housetype'].value_counts())
 
 #Debugging to see owner occupancy status of all homes
@@ -138,16 +139,68 @@ print(cleandata['owneroccupancycode'].value_counts())
 #Debugging to see when homes were built
 print(cleandata['yearbuilt'].value_counts().sort_index(0))
 
+townhomes = cleandata.copy()
+townhomes.drop(townhomes[townhomes['housetype'] == "SF"].index, inplace = True)
+singlefamily = cleandata.copy()
+singlefamily.drop(singlefamily[singlefamily['housetype'] == "TH"].index, inplace = True)
 
-#Saving to CSV
-cleandata.to_csv('cleandata.csv')
 
 #printing data frame to screen
-cleandata
+#cleandata
 
+#Overall
 cleandata["totalchange"] = pd.to_numeric(cleandata["totalchange"])
-averagechange = cleandata["totalchange"].mean()
-#print (averagechange)
-averagechange = "${:,.2f}".format(averagechange)
-print('The average home assessment change in Tanyard Springs is ', averagechange) 
+overallaveragechange = cleandata["totalchange"].mean()
+overallaveragechange = "${:,.2f}".format(overallaveragechange)
+overallminimumchange = cleandata['totalchange'].min()
+overallmaximumchange = cleandata['totalchange'].max()
+overallminimumchange = "${:,.2f}".format(overallminimumchange)
+overallmaximumchange = "${:,.2f}".format(overallmaximumchange)
+print('The average home assessment change in Tanyard Springs is ', overallaveragechange , ' and ranges from ', overallminimumchange, ' and ' , overallmaximumchange  )
 
+#Townhomes
+townhomes["totalchange"] = pd.to_numeric(townhomes["totalchange"])
+townhomesaveragechange = townhomes["totalchange"].mean()
+townhomesaveragechange = "${:,.2f}".format(townhomesaveragechange)
+townhouseminimumchange = townhomes['totalchange'].min()
+townhousemaximumchange = townhomes['totalchange'].max()
+townhouseminimumchange = "${:,.2f}".format(townhouseminimumchange)
+townhousemaximumchange = "${:,.2f}".format(townhousemaximumchange)
+print('The average TownHome assessment change in Tanyard Springs is ', townhomesaveragechange , ' and ranges from ', townhouseminimumchange, ' and ' , townhousemaximumchange  )
+
+#SingleFamily
+singlefamily["totalchange"] = pd.to_numeric(singlefamily["totalchange"])
+singlefamilyaveragechange = singlefamily["totalchange"].mean()
+singlefamilyaveragechange = "${:,.2f}".format(singlefamilyaveragechange)
+singlefamilyminimumchange = singlefamily['totalchange'].min()
+singlefamilymaximumchange = singlefamily['totalchange'].max()
+singlefamilyminimumchange = "${:,.2f}".format(singlefamilyminimumchange)
+singlefamilymaximumchange = "${:,.2f}".format(singlefamilymaximumchange)
+print('The average SFH assessment change in Tanyard Springs is ', singlefamilyaveragechange , ' and ranges from ', singlefamilyminimumchange, ' and ' , singlefamilymaximumchange  )
+
+#Formatting to Monetary numbers
+cleandata["currentyeartotalassessment"] = cleandata["currentyeartotalassessment"].apply(
+    lambda x: format_currency(x, currency="USD", locale="en_US"))
+cleandata["box2"] = cleandata["box2"].apply(
+    lambda x: format_currency(x, currency="USD", locale="en_US"))
+cleandata["box4"] = cleandata["box4"].apply(
+    lambda x: format_currency(x, currency="USD", locale="en_US"))
+cleandata["box5"] = cleandata["box6"].apply(
+    lambda x: format_currency(x, currency="USD", locale="en_US"))
+cleandata["box6"] = cleandata["box6"].apply(
+    lambda x: format_currency(x, currency="USD", locale="en_US"))
+cleandata["box7"] = cleandata["box7"].apply(
+    lambda x: format_currency(x, currency="USD", locale="en_US"))
+cleandata["box8"] = cleandata["box8"].apply(
+    lambda x: format_currency(x, currency="USD", locale="en_US"))
+cleandata["box9"] = cleandata["box9"].apply(
+    lambda x: format_currency(x, currency="USD", locale="en_US"))
+cleandata["box10"] = cleandata["box10"].apply(
+    lambda x: format_currency(x, currency="USD", locale="en_US"))
+cleandata["totalchange"] = cleandata["totalchange"].apply(
+    lambda x: format_currency(x, currency="USD", locale="en_US"))
+
+#Saving to CSV
+cleandata.to_csv('output/cleandata.csv')
+townhomes.to_csv('output/townhomes.csv')
+singlefamily.to_csv('output/singlefamily.csv')

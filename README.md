@@ -3,6 +3,9 @@ This script is set up to pull public avaiable data for the community of Tanyard 
 
 You have will have to obtain your own personal authentication token from https://opendata.maryland.gov. There is an example auth.py.example. This file will need to be updated and then renamed to auth.py. 
 
+# DISCLAIMER
+This project is not affiliated with the State of Maryland or any of its 24 jurisdictions. This project is pulling data that is avaiable via a public database that is accessible to all persons
+
 # TO DO
 * Clean- up functions
 * Calculate property taxes that are due in a annual payment setup

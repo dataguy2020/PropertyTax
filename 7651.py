@@ -2,8 +2,8 @@
 author = "Michael Brown"
 
 import pandas as pd
-from limits import *
-from rates import *
+from limits import statelimit annearundelcountylimit
+from rates import statetaxrate annearundeltaxrate annearundelsolidwaste annearundelstormwater
 
 from warnings import simplefilter
 

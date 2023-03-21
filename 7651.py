@@ -78,6 +78,8 @@ tanyardTH['year3staterealestate'] = (tanyardTH['box10'] * statetaxrate) / 100
 tanyardTH['year3total'] = tanyardTH['year3countyrealestate'] + tanyardTH['year3staterealestate'] - tanyardTH[
     'year3countycredit'] - tanyardTH['year3statecredit'] + annearundelsolidwaste + annearundelstormwater
 
+tanyardTH.loc[(tanyardTH['owneroccupancycode'] == 'Yes') & (tanyardTH['homesteadcreditqualificationcode'] == 'Approved'), 'test'] = tanyardTH['year3total'] * 2
+
 # debugging
 print(tanyardTH.dtypes)
 print(tanyardTH)

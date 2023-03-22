@@ -9,7 +9,7 @@ import datetime as dt
 from auth import applicationtoken
 from babel.numbers import format_currency
 #importing personal modules
-from functions import *
+from functions import owneroccupancycondition, yearcondition, homesteadqualiticationcondition
 import pandas as pd
 import seaborn as sns
 from sodapy import Socrata

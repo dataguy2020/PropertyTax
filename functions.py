@@ -5,13 +5,15 @@ def owneroccupancycondition(x):
         return " No "
     else:
         return "0"
-        
+
+
 def yearcondition(x):
     if x == "O":
         return "1899"
     else:
         return x
-    
+
+
 def homesteadqualiticationcondition(x):
     if x == "A":
         return "Approved"
@@ -19,3 +21,8 @@ def homesteadqualiticationcondition(x):
         return "Denied"
     else:
         return "No Application"
+
+
+def test(x, y):
+    from rates import statetaxrate
+    return x

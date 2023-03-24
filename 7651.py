@@ -78,7 +78,7 @@ tanyardTH.loc[(tanyardTH['owneroccupancycode'] == 'Yes') & (tanyardTH['homestead
 tanyardTH.loc[(tanyardTH['owneroccupancycode'] != 'Yes') | (tanyardTH['homesteadcreditqualificationcode'] != 'Approved'), 'year3total'] = (tanyardTH['year3countyrealestate'] + tanyardTH['year3staterealestate'] + annearundelsolidwaste + annearundelstormwater)
 
 from functions import test
-test = test(tanyardTH['owneroccupancycode'],tanyardTH['homesteadcreditqualificationcode'], tanyardTH['year3countyrealestate'], tanyardTH['year3staterealestate'], tanyardTH['year3countycredit'], tanyardTH['year3statecredit'], annearundelsolidwaste, annearundelstormwater)
+test = test(tanyardTH['owneroccupancycode'],tanyardTH['homesteadcreditqualificationcode'], tanyardTH['exemptclass'], tanyardTH['year3countyrealestate'], tanyardTH['year3staterealestate'], tanyardTH['year3countycredit'], tanyardTH['year3statecredit'], annearundelsolidwaste, annearundelstormwater)
 #functions can only have 2 arguments?
 
 # debugging

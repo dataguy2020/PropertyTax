@@ -22,7 +22,15 @@ def homesteadqualiticationcondition(x):
     else:
         return "No Application"
 
+def test(owneroccupied, homesteadcode, year3countyrealestate, year3staterealestate, year3countycredit, year3statecredit):
+    from rates import statetaxrate, annearundeltaxrate, annearundelsolidwaste, annearundelstormwater
 
-def test(x, y):
-    from rates import statetaxrate
-    return x
+#here for debugging
+#   tanyardTH.loc[(tanyardTH['owneroccupancycode'] == 'Yes') & (tanyardTH['homesteadcreditqualificationcode'] == 'Approved'), 'year3total']\
+#   = (tanyardTH['year3countyrealestate'] + tanyardTH['year3staterealestate'] - tanyardTH['year3countycredit'] - tanyardTH['year3statecredit'] +
+#   annearundelsolidwaste + annearundelstormwater)
+
+#   tanyardTH.loc[(tanyardTH['owneroccupancycode'] != 'Yes') | (tanyardTH['homesteadcreditqualificationcode'] != 'Approved'), 'year3total'] =
+#   (tanyardTH['year3countyrealestate'] + tanyardTH['year3staterealestate'] + annearundelsolidwaste + annearundelstormwater)
+
+    return owneroccupied

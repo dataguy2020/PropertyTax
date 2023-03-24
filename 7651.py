@@ -2,8 +2,8 @@
 author = "Michael Brown"
 
 import pandas as pd
-from limits import statelimit annearundelcountylimit
-from rates import statetaxrate annearundeltaxrate annearundelsolidwaste annearundelstormwater
+from limits import statelimit, annearundelcountylimit
+from rates import statetaxrate, annearundeltaxrate, annearundelsolidwaste, annearundelstormwater
 from warnings import simplefilter
 
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
@@ -77,11 +77,12 @@ tanyardTH.loc[(tanyardTH['owneroccupancycode'] == 'Yes') & (tanyardTH['homestead
     = (tanyardTH['year3countyrealestate'] + tanyardTH['year3staterealestate'] - tanyardTH['year3countycredit'] - tanyardTH['year3statecredit'] + annearundelsolidwaste + annearundelstormwater)
 tanyardTH.loc[(tanyardTH['owneroccupancycode'] != 'Yes') | (tanyardTH['homesteadcreditqualificationcode'] != 'Approved'), 'year3total'] = (tanyardTH['year3countyrealestate'] + tanyardTH['year3staterealestate'] + annearundelsolidwaste + annearundelstormwater)
 
+from functions import test
 test = test(tanyardTH['owneroccupancycode'],tanyardTH['homesteadcreditqualificationcode'], tanyardTH['year3countyrealestate'], tanyardTH['year3staterealestate'], tanyardTH['year3countycredit'], tanyardTH['year3statecredit'], annearundelsolidwaste, annearundelstormwater)
 #functions can only have 2 arguments?
 
 # debugging
-#print(tanyardTH.dtypes)
+print(tanyardTH.dtypes)
 #print(tanyardTH)
 tanyardTH.to_csv('7651.csv')
 

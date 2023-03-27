@@ -33,7 +33,7 @@ def taxcalculation(owneroccupied, homesteadcode, exemptclass, countyrealestate, 
             if (homesteadcode == "Yes"):
                 taxbill = countyrealestate + staterealestate - countycredit - statecredit + annearundelsolidwaste + annearundelstormwater
                 return taxbill
-            else:
+            elif (homesteadcode != "No"):
                 taxbill = countyrealestate + staterealestate - countycredit - statecredit + annearundelsolidwaste + annearundelstormwater
                 return taxbill
         else:

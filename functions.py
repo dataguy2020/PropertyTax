@@ -2,17 +2,15 @@ def owneroccupancycondition(x):
     if x == "H":
         return "Yes"
     elif x == "N":
-        return " No "
+        return "No"
     else:
         return "0"
-
 
 def yearcondition(x):
     if x == "O":
         return "1899"
     else:
         return x
-
 
 def homesteadqualiticationcondition(x):
     if x == "A":
@@ -22,7 +20,22 @@ def homesteadqualiticationcondition(x):
     else:
         return "No Application"
 
+def taxcalculation(owneroccupied, homesteadcode, exemptclass, countyrealestate, staterealestate, countycredit, statecredit):
+    from rates import annearundelsolidwaste, annearundelstormwater
 
-def test(x, y):
-    from rates import statetaxrate
-    return x
+    if (exemptclass != "Blank"):
+        if (owneroccupied == "Yes" | owneroccupied == "No"):
+            taxbill = annearundelsolidwaste + annearundelstormwater
+            return taxbill
+
+    if (exemptclass == "Blank"):
+        if (owneroccupied == "Yes"):
+            if (homesteadcode == "Approved" or homesteadcode == "Denied"):
+                taxbill = countyrealestate + staterealestate - countycredit - statecredit + annearundelsolidwaste + annearundelstormwater
+                return taxbill
+        else:
+            taxbill = countyrealestate + staterealestate + annearundelsolidwaste + annearundelstormwater
+            return taxbill 
+    else:
+        taxbill = 0 
+        return taxbill 

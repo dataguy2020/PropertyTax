@@ -2,7 +2,7 @@ def owneroccupancycondition(x):
     if x == "H":
         return "Yes"
     elif x == "N":
-        return " No "
+        return "No"
     else:
         return "0"
 
@@ -30,8 +30,12 @@ def taxcalculation(owneroccupied, homesteadcode, exemptclass, countyrealestate, 
 
     if (exemptclass == "Blank"):
         if (owneroccupied == "Yes"):
-            taxbill = countyrealestate + staterealestate - countycredit - statecredit + annearundelsolidwaste + annearundelstormwater
-            return taxbill
+            if (homesteadcode == "Yes"):
+                taxbill = countyrealestate + staterealestate - countycredit - statecredit + annearundelsolidwaste + annearundelstormwater
+                return taxbill
+            else:
+                taxbill = countyrealestate + staterealestate - countycredit - statecredit + annearundelsolidwaste + annearundelstormwater
+                return taxbill
         else:
             taxbill = countyrealestate + staterealestate + annearundelsolidwaste + annearundelstormwater
             return taxbill 

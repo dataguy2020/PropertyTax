@@ -10,7 +10,7 @@ from functions import taxcalculation
 
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 
-tanyardTH = pd.read_csv('7651b.csv')
+tanyardTH = pd.read_csv('test/7651b.csv')
 
 # year 1 calculation
 tanyardTH['year1difference'] = tanyardTH['box8'] - tanyardTH['box4']
@@ -81,7 +81,7 @@ tanyardTH['year3staterealestate'] = (tanyardTH['box10'] * statetaxrate) / 100
 #            tanyardTH['year3countyrealestate'], tanyardTH['year3staterealestate'], tanyardTH['year3countycredit'],
 #            tanyardTH['year3statecredit'])
 
-tanyardTH["test"] = tanyardTH.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year3countyrealestate"], x["year3staterealestate"], x["year3countycredit"], x["year3statecredit"] ), axis=1)
+tanyardTH["year3total"] = tanyardTH.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year3countyrealestate"], x["year3staterealestate"], x["year3countycredit"], x["year3statecredit"] ), axis=1)
 
 # debugging
 #print(tanyardTH.dtypes)

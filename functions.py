@@ -27,7 +27,7 @@ def taxcalculation(owneroccupied, homesteadcode, exemptclass, countyrealestate, 
         if (owneroccupied == "Yes"):
             taxbill = annearundelsolidwaste + annearundelstormwater
             return taxbill
-        else:
+        elif (owneroccupied == "No"):
             taxbill = annearundelsolidwaste + annearundelstormwater
             return taxbill 
     if (exemptclass == "Blank"):

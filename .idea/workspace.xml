@@ -50,7 +50,7 @@
       <recent name="C:\GitHub\PropertyTax\output" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.tanyardsprings">
+  <component name="RunManager" selected="Python.7651">
     <configuration name="7651" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PropertyTax" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -114,6 +114,11 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.tanyardsprings" />
+      <item itemvalue="Python.7651" />
+      <item itemvalue="Python.functions" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.7651" />

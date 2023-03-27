@@ -8,10 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/7651.py" beforeDir="false" afterPath="$PROJECT_DIR$/7651.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/cleandata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/cleandata.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/results_df.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/results_df.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/singlefamily.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/singlefamily.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/townhomes.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/townhomes.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

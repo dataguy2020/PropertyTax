@@ -24,12 +24,10 @@ def taxcalculation(owneroccupied, homesteadcode, exemptclass, countyrealestate, 
     from rates import annearundelsolidwaste, annearundelstormwater
 
     if (exemptclass != "Blank"):
-        if (owneroccupied == "Yes"):
+        if (owneroccupied == "Yes" | owneroccupied == "No"):
             taxbill = annearundelsolidwaste + annearundelstormwater
             return taxbill
-        elif (owneroccupied == "No"):
-            taxbill = annearundelsolidwaste + annearundelstormwater
-            return taxbill 
+
     if (exemptclass == "Blank"):
         if (owneroccupied == "Yes"):
             taxbill = countyrealestate + staterealestate - countycredit - statecredit + annearundelsolidwaste + annearundelstormwater

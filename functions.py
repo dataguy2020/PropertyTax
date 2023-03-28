@@ -40,7 +40,7 @@ def taxcalculation(owneroccupied, homesteadcode, exemptclass, countyrealestate, 
         taxbill = 0 
         return taxbill 
     
-def countycredit(countydifference, countydifference)
+def countycredit(countydifference, countydifference):
     from rates import annearundeltaxrate
     if (countydifference < 0):
         countycredit = 0
@@ -49,7 +49,7 @@ def countycredit(countydifference, countydifference)
         countycredit = (countydifference * annearundeltaxrate) / 100
         return county credit
     
-def statecredit(statedifference, statedifference)
+def statecredit(statedifference, statedifference):
     from rates import statetaxrate 
     if ( countycredit < 0):
         statecredit = 0

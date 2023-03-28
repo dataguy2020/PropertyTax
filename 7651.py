@@ -32,8 +32,7 @@ tanyardTH.loc[tanyardTH['year1statedifference'] > 0, 'year1statecredit'] = (tany
 # year 1 straight real estate tax payment without exempt class
 tanyardTH['year1countyrealestate'] = (tanyardTH['box8'] * annearundeltaxrate) / 100
 tanyardTH['year1staterealestate'] = (tanyardTH['box8'] * statetaxrate) / 100
-tanyardTH['year1total'] = tanyardTH['year1countyrealestate'] + tanyardTH['year1staterealestate'] - tanyardTH[
-    'year1countycredit'] - tanyardTH['year1statecredit'] + annearundelsolidwaste + annearundelstormwater
+tanyardTH["year1total"] = tanyardTH.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year1countyrealestate"], x["year1staterealestate"], x["year1countycredit"], x["year1statecredit"] ), axis=1)
 
 # year 2 calculation
 tanyardTH['year2countylimit'] = tanyardTH['year1countylimit'] + (tanyardTH['year1countylimit'] * annearundelcountylimit)
@@ -54,8 +53,7 @@ tanyardTH.loc[tanyardTH['year2statedifference'] > 0, 'year2statecredit'] = (tany
 # year 2 straight real estate tax payment without exempt class
 tanyardTH['year2countyrealestate'] = (tanyardTH['box9'] * annearundeltaxrate) / 100
 tanyardTH['year2staterealestate'] = (tanyardTH['box9'] * statetaxrate) / 100
-tanyardTH['year2total'] = tanyardTH['year2countyrealestate'] + tanyardTH['year2staterealestate'] - tanyardTH[
-    'year2countycredit'] - tanyardTH['year2statecredit'] + annearundelsolidwaste + annearundelstormwater
+tanyardTH["year2total"] = taxnyardTH.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year2countyrealestate"], x["year2staterealestate"], x["year2countycredit"], x["year2statecredit"] ), axis=1)
 
 # year 3 calculation
 tanyardTH['year3countylimit'] = tanyardTH['year2countylimit'] + (tanyardTH['year2countylimit'] * annearundelcountylimit)
@@ -82,4 +80,4 @@ tanyardTH["year3total"] = tanyardTH.apply(lambda x : taxcalculation(x["owneroccu
 # debugging
 #print(tanyardTH.dtypes)
 print(tanyardTH)
-tanyardTH.to_csv('7651.csv')
+tanyardTH.to_csv('output/7651.csv')

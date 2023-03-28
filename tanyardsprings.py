@@ -9,7 +9,9 @@ import datetime as dt
 from auth import applicationtoken
 from babel.numbers import format_currency
 # importing personal modules
-from functions import owneroccupancycondition, yearcondition, homesteadqualiticationcondition
+from functions import owneroccupancycondition, yearcondition, homesteadqualiticationcondition, taxcalculation
+from limits import statelimit, annearundelcountylimit
+from rates import statetaxrate, annearundelstormwater, annearundelsolidwaste, annearundeltaxrate
 import pandas as pd
 import seaborn as sns
 from sodapy import Socrata
@@ -138,6 +140,79 @@ print(cleandata['owneroccupancycode'].value_counts())
 
 # Debugging to see when homes were built
 print(cleandata['yearbuilt'].value_counts().sort_index(0))
+
+
+# year 1 calculation
+cleandata['year1difference'] = cleandata['box8'] - cleandata['box4']
+cleandata['year1countylimit'] = cleandata['box4'] + (cleandata['box4'] * annearundelcountylimit)
+cleandata['year1statelimit'] = cleandata['box4'] + (cleandata['box4'] * statelimit)
+cleandata['year1countydifference'] = cleandata['box8'] - cleandata['year1countylimit']
+cleandata['year1statedifference'] = cleandata['box8'] - cleandata['year1statelimit']
+
+# year1 county credit calculation
+cleandata.loc[cleandata['year1countydifference'] < 0, 'year1countycredit'] = 0
+cleandata.loc[cleandata['year1countydifference'] > 0, 'year1countycredit'] = (cleandata[
+                                                                                  'year1countydifference'] * annearundeltaxrate) / 100
+
+# year 1 state credit calculation
+cleandata.loc[cleandata['year1statedifference'] < 0, 'year1statecredit'] = 0
+cleandata.loc[cleandata['year1statedifference'] > 0, 'year1statecredit'] = (cleandata[
+                                                                                'year1statedifference'] * statetaxrate) / 100
+
+# year 1 straight real estate tax payment without exempt class
+cleandata['year1countyrealestate'] = (cleandata['box8'] * annearundeltaxrate) / 100
+cleandata['year1staterealestate'] = (cleandata['box8'] * statetaxrate) / 100
+cleandata["year2total"] = cleandata.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year1countyrealestate"], x["year1staterealestate"], x["year1countycredit"], x["year1statecredit"] ), axis=1)
+
+
+# year 2 calculation
+cleandata['year2countylimit'] = cleandata['year1countylimit'] + (cleandata['year1countylimit'] * annearundelcountylimit)
+cleandata['year2statelmit'] = cleandata['box2'] + (cleandata['box2'] * statelimit)
+cleandata['year2countydifference'] = cleandata['box9'] - cleandata['year2countylimit']
+cleandata['year2statedifference'] = cleandata['box8'] - cleandata['year2statelmit']
+
+# year 2 county credit calculation
+cleandata.loc[cleandata['year2countydifference'] < 0, 'year2countycredit'] = 0
+cleandata.loc[cleandata['year2countydifference'] > 0, 'year2countycredit'] = (cleandata[
+                                                                                  'year2countydifference'] * annearundeltaxrate) / 100
+
+# year 2 state credit calculation
+cleandata.loc[cleandata['year2statedifference'] < 0, 'year2statecredit'] = 0
+cleandata.loc[cleandata['year2statedifference'] > 0, 'year2statecredit'] = (cleandata[
+                                                                                'year2statedifference'] * statetaxrate) / 100
+
+# year 2 straight real estate tax payment without exempt class
+cleandata['year2countyrealestate'] = (cleandata['box9'] * annearundeltaxrate) / 100
+cleandata['year2staterealestate'] = (cleandata['box9'] * statetaxrate) / 100
+cleandata["year2total"] = cleandata.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year2countyrealestate"], x["year2staterealestate"], x["year2countycredit"], x["year2statecredit"] ), axis=1)
+
+
+# year 3 calculation
+cleandata['year3countylimit'] = cleandata['year2countylimit'] + (cleandata['year2countylimit'] * annearundelcountylimit)
+cleandata['year3statelimit'] = cleandata['box9'] + (cleandata['box9'] * statelimit)
+cleandata['year3countydifference'] = cleandata['box10'] - cleandata['year3countylimit']
+cleandata['year3statedifference'] = cleandata['box9'] - cleandata['year3statelimit']
+
+# year 3 county credit calculation
+cleandata.loc[cleandata['year3countydifference'] < 0, 'year3countycredit'] = 0
+cleandata.loc[cleandata['year3countydifference'] > 0, 'year3countycredit'] = (cleandata[
+                                                                                  'year3countydifference'] * annearundeltaxrate) / 100
+
+# year 3 state credit calculation
+cleandata.loc[cleandata['year3statedifference'] < 0, 'year3statecredit'] = 0
+cleandata.loc[cleandata['year3statedifference'] > 0, 'year3statecredit'] = (cleandata[
+                                                                                'year3statedifference'] * statetaxrate) / 100
+
+# year3 straight real estate tax payment without exempt class
+cleandata['year3countyrealestate'] = (cleandata['box10'] * annearundeltaxrate) / 100
+cleandata['year3staterealestate'] = (cleandata['box10'] * statetaxrate) / 100
+
+#test = test(cleandata['owneroccupancycode'], cleandata['homesteadcreditqualificationcode'], cleandata['exemptclass'],
+#            cleandata['year3countyrealestate'], cleandata['year3staterealestate'], cleandata['year3countycredit'],
+#            cleandata['year3statecredit'])
+
+cleandata["year3total"] = cleandata.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year3countyrealestate"], x["year3staterealestate"], x["year3countycredit"], x["year3statecredit"] ), axis=1)
+
 
 townhomes = cleandata.copy()
 townhomes.drop(townhomes[townhomes['housetype'] == "SF"].index, inplace=True)

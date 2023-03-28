@@ -53,7 +53,7 @@ tanyardTH.loc[tanyardTH['year2statedifference'] > 0, 'year2statecredit'] = (tany
 # year 2 straight real estate tax payment without exempt class
 tanyardTH['year2countyrealestate'] = (tanyardTH['box9'] * annearundeltaxrate) / 100
 tanyardTH['year2staterealestate'] = (tanyardTH['box9'] * statetaxrate) / 100
-tanyardTH["year2total"] = taxnyardTH.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year2countyrealestate"], x["year2staterealestate"], x["year2countycredit"], x["year2statecredit"] ), axis=1)
+tanyardTH["year2total"] = tanyardTH.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year2countyrealestate"], x["year2staterealestate"], x["year2countycredit"], x["year2statecredit"] ), axis=1)
 
 # year 3 calculation
 tanyardTH['year3countylimit'] = tanyardTH['year2countylimit'] + (tanyardTH['year2countylimit'] * annearundelcountylimit)

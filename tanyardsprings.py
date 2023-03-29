@@ -41,6 +41,7 @@ cleandata = results_df[['legal_description_line_2_mdp_field_legal2_sdat_field_18
 cleandata.rename(columns={'legal_description_line_2_mdp_field_legal2_sdat_field_18': 'address'}, inplace=True)
 
 # copying over columns from originating data frame
+cleandata['county'] = results_df['jurisdiction_code_mdp_field_jurscode']
 cleandata['accountnumber'] = results_df['record_key_account_number_sdat_field_3']
 cleandata['opendataupdate'] = results_df['date_of_most_recent_open_data_portal_record_update']
 cleandata['key'] = cleandata['accountnumber']

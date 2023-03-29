@@ -45,7 +45,7 @@ def countycredit(countydifference, countydifference):
     if (countydifference < 0):
         countycredit = 0
         return countycredit
-    else
+    else:
         countycredit = (countydifference * annearundeltaxrate) / 100
         return county credit
     
@@ -54,9 +54,26 @@ def statecredit(statedifference, statedifference):
     if (countycredit < 0):
         statecredit = 0
         return countycredit
-    else
+    else:
         statecredit = (statedifference * statetaxrate) / 100
         return statecredit
         
-#def semiannualpayments (owneroccupied, totalpayment, county)
+def semiannualpayments (owneroccupied, totalpayment, county):
+    from interest import anneinterest 
+    if (county == "ANNE"):
+        if (owneroccupied == "Yes"):
+            paymentone = totalpayment / 2
+            paymenttwo = (totalpayment - paymentone)
+            paymenttwo = paymenttwo + (paymenttwo * anneinterest)
+            return paymentone, paymenttwo
+        else:
+            paymentone = totalpayment
+            paymenttwo = 0
+            return paymentone, paymenttwo
+    else:
+        paymentone = 0
+        paymenttwo = 0
+        return paymentone, paymenttwo
+    
+
 

@@ -1,1 +1,3 @@
-anneinterest = (0.13/100)
+anneinterestpercentage = 0.13
+anneinterest = (anneinterestpercentage/100)
+

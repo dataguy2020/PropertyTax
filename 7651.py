@@ -5,7 +5,7 @@ import pandas as pd
 from limits import statelimit, annearundelcountylimit
 from rates import statetaxrate, annearundeltaxrate, annearundelsolidwaste, annearundelstormwater
 from warnings import simplefilter
-from functions import taxcalculation
+from functions import taxcalculation, semiannualpayments
 
 
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
@@ -76,6 +76,9 @@ tanyardTH['year3countyrealestate'] = (tanyardTH['box10'] * annearundeltaxrate) /
 tanyardTH['year3staterealestate'] = (tanyardTH['box10'] * statetaxrate) / 100
 
 tanyardTH["year3total"] = tanyardTH.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year3countyrealestate"], x["year3staterealestate"], x["year3countycredit"], x["year3statecredit"] ), axis=1)
+tanyardTH["year3paytest"] = tanyardTH.apply(lambda x : semiannualpayments(x["owneroccupancycode"],  x["year3total"] ), axis=1)
+tanyardTH["year3pay1"] = tanyardTH["year3paytest"][0][0]
+tanyardTH["year3pay2"] = tanyardTH["year3paytest"][0][1]
 
 # debugging
 #print(tanyardTH.dtypes)

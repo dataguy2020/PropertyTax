@@ -58,5 +58,5 @@ def statecredit(statedifference, statedifference):
         statecredit = (statedifference * statetaxrate) / 100
         return statecredit
         
-#def semiannualpayments (owneroccupied, totalpayment)
+#def semiannualpayments (owneroccupied, totalpayment, county)
 

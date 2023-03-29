@@ -40,16 +40,16 @@ def taxcalculation(owneroccupied, homesteadcode, exemptclass, countyrealestate, 
         taxbill = 0 
         return taxbill 
     
-def countycredit(countydifference, countydifference):
+def countycredit(countydifference):
     from rates import annearundeltaxrate
     if (countydifference < 0):
         countycredit = 0
         return countycredit
     else:
         countycredit = (countydifference * annearundeltaxrate) / 100
-        return county credit
+        return countycredit
     
-def statecredit(statedifference, statedifference):
+def statecredit(statedifference):
     from rates import statetaxrate 
     if (countycredit < 0):
         statecredit = 0
@@ -63,8 +63,8 @@ def semiannualpayments (owneroccupied, totalpayment, county):
     if (county == "ANNE"):
         if (owneroccupied == "Yes"):
             paymentone = totalpayment / 2
-            paymenttwo = (totalpayment - paymentone)
-            paymenttwo = paymenttwo + (paymenttwo * anneinterest)
+            paymenttwo = year3total - paymentone
+            paymenttwo = (paymenttwo * (anneinterestrate / 100)) + paymenttwo
             return paymentone, paymenttwo
         else:
             paymentone = totalpayment
@@ -75,5 +75,14 @@ def semiannualpayments (owneroccupied, totalpayment, county):
         paymenttwo = 0
         return paymentone, paymenttwo
     
-
-
+def semiannualpayments(owneroccupancycode, yeartotal):
+    from interestRates import anneinterestrate
+    if ( owneroccupancycode == "Yes"):
+        paymentone = yeartotal / 2
+        paymenttwo = yeartotal - paymentone
+        paymenttwo = (paymenttwo *(anneinterestrate/100) ) + paymenttwo
+        return paymentone, paymenttwo
+    else:
+        paymentone = yeartotal / 2
+        paymenttwo = yeartotal - paymentone
+        return paymentone, paymenttwo

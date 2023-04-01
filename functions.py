@@ -74,13 +74,19 @@ def semiannualpayments (owneroccupied, totalpayment, county):
         paymentone = 0
         paymenttwo = 0
         return paymentone, paymenttwo
+
+def interestrate(county):
+    if (county == "ANNE"):
+        from interestRates import anneinterestrate
+        countyinterestrate = anneinterestrate/100
+        return countyinterestrate
     
-def semiannualpayments(owneroccupancycode, yeartotal):
+def semiannualpayments(owneroccupancycode, yeartotal, county):
     from interestRates import anneinterestrate
     if ( owneroccupancycode == "Yes"):
         paymentone = yeartotal / 2
         paymenttwo = yeartotal - paymentone
-        paymenttwo = (paymenttwo *(anneinterestrate/100) ) + paymenttwo
+        paymenttwo = (paymenttwo *(interestrate(county)) ) + paymenttwo
         return paymentone, paymenttwo
     else:
         paymentone = yeartotal / 2

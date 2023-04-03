@@ -30,8 +30,14 @@ def taxcalculation(owneroccupied, homesteadcode, exemptclass, countyrealestate, 
 
     if (exemptclass == "Blank"):
         if (owneroccupied in ("Yes")):
-            if (homesteadcode == "Approved" or homesteadcode == "Denied"):
+            if (homesteadcode == "Approved"):
                 taxbill = countyrealestate + staterealestate - countycredit - statecredit + annearundelsolidwaste + annearundelstormwater
+                return taxbill
+            elif (homesteadcode == "Denied"):
+                taxbill = countyrealestate + staterealestate - countycredit - statecredit + annearundelsolidwaste + annearundelstormwater
+                return taxbill
+            elif (homesteadcode == "No Application"):
+                taxbill = countyrealestate + staterealestate + annearundelsolidwaste + annearundelstormwater
                 return taxbill
         else:
             taxbill = countyrealestate + staterealestate + annearundelsolidwaste + annearundelstormwater
@@ -57,14 +63,21 @@ def statecredit(statedifference):
     else:
         statecredit = (statedifference * statetaxrate) / 100
         return statecredit
-        
+
+def interestrate(county):
+    if (county == "ANNE"):
+        from interestRates import anneinterestrate
+        countyinterestrate = anneinterestrate / 100
+        return countyinterestrate
+
+
 def semiannualpayments (owneroccupied, totalpayment, county):
     from interest import anneinterest 
     if (county == "ANNE"):
         if (owneroccupied == "Yes"):
             paymentone = totalpayment / 2
-            paymenttwo = year3total - paymentone
-            paymenttwo = (paymenttwo * (anneinterestrate / 100)) + paymenttwo
+            paymenttwo = totalpayment - paymentone
+            paymenttwo = (paymenttwo * (interestrate(county))) + paymenttwo
             return paymentone, paymenttwo
         else:
             paymentone = totalpayment
@@ -73,22 +86,4 @@ def semiannualpayments (owneroccupied, totalpayment, county):
     else:
         paymentone = 0
         paymenttwo = 0
-        return paymentone, paymenttwo
-
-def interestrate(county):
-    if (county == "ANNE"):
-        from interestRates import anneinterestrate
-        countyinterestrate = anneinterestrate/100
-        return countyinterestrate
-    
-def semiannualpayments(owneroccupancycode, yeartotal, county):
-    from interestRates import anneinterestrate
-    if ( owneroccupancycode == "Yes"):
-        paymentone = yeartotal / 2
-        paymenttwo = yeartotal - paymentone
-        paymenttwo = (paymenttwo *(interestrate(county)) ) + paymenttwo
-        return paymentone, paymenttwo
-    else:
-        paymentone = yeartotal / 2
-        paymenttwo = yeartotal - paymentone
         return paymentone, paymenttwo

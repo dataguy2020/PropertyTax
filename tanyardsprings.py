@@ -9,7 +9,7 @@ import datetime as dt
 from auth import applicationtoken
 from babel.numbers import format_currency
 # importing personal modules
-from functions import owneroccupancycondition, yearcondition, homesteadqualiticationcondition, taxcalculation
+from functions import owneroccupancycondition, yearcondition, homesteadqualiticationcondition, taxcalculation, semiannualpayments
 from limits import statelimit, annearundelcountylimit
 from rates import statetaxrate, annearundelstormwater, annearundelsolidwaste, annearundeltaxrate
 import pandas as pd
@@ -163,7 +163,7 @@ cleandata.loc[cleandata['year1statedifference'] > 0, 'year1statecredit'] = (clea
 # year 1 straight real estate tax payment without exempt class
 cleandata['year1countyrealestate'] = (cleandata['box8'] * annearundeltaxrate) / 100
 cleandata['year1staterealestate'] = (cleandata['box8'] * statetaxrate) / 100
-cleandata["year2total"] = cleandata.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year1countyrealestate"], x["year1staterealestate"], x["year1countycredit"], x["year1statecredit"] ), axis=1)
+cleandata["year1total"] = cleandata.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year1countyrealestate"], x["year1staterealestate"], x["year1countycredit"], x["year1statecredit"] ), axis=1)
 
 
 # year 2 calculation
@@ -180,7 +180,7 @@ cleandata.loc[cleandata['year2countydifference'] > 0, 'year2countycredit'] = (cl
 # year 2 state credit calculation
 cleandata.loc[cleandata['year2statedifference'] < 0, 'year2statecredit'] = 0
 cleandata.loc[cleandata['year2statedifference'] > 0, 'year2statecredit'] = (cleandata[
-                                                                                'year2statedifference'] * statetaxrate) / 100
+                                                                               'year2statedifference'] * statetaxrate) / 100
 
 # year 2 straight real estate tax payment without exempt class
 cleandata['year2countyrealestate'] = (cleandata['box9'] * annearundeltaxrate) / 100
@@ -214,9 +214,14 @@ cleandata['year3staterealestate'] = (cleandata['box10'] * statetaxrate) / 100
 
 cleandata["year3total"] = cleandata.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year3countyrealestate"], x["year3staterealestate"], x["year3countycredit"], x["year3statecredit"] ), axis=1)
 
+cleandata["year3paytest"] = cleandata.apply(lambda x: semiannualpayments(x["owneroccupancycode"], x["year3total"], x["county"]),
+                                            axis=1)
+#cleandata["year3pay1"] = cleandata["year3paytest"][0][0]
+#cleandata["year3pay2"] = cleandata["year3paytest"][0][1]
 
 townhomes = cleandata.copy()
 townhomes.drop(townhomes[townhomes['housetype'] == "SF"].index, inplace=True)
+
 singlefamily = cleandata.copy()
 singlefamily.drop(singlefamily[singlefamily['housetype'] == "TH"].index, inplace=True)
 
@@ -274,6 +279,20 @@ cleandata["box10"] = cleandata["box10"].apply(
     lambda x: format_currency(x, currency="USD", locale="en_US"))
 cleandata["totalchange"] = cleandata["totalchange"].apply(
     lambda x: format_currency(x, currency="USD", locale="en_US"))
+
+
+townhomeyear1 = townhomes['year1total'].sum()
+townhomeyear2 = townhomes['year2total'].sum()
+townhomeyear3 = townhomes['year3total'].sum()
+singlefamilyyear1  = singlefamily['year1total'].sum()
+
+print('The average TownHome assessment change in Tanyard Springs is ', townhomesaveragechange, ' and ranges from ',
+      townhouseminimumchange, ' and ', townhousemaximumchange)
+
+print ('The townhome total year 1 is ',townhomeyear1, '.')
+print ('The townhome total year 2 is ',townhomeyear2, '.')
+print ('The townhome total year 3 is ',townhomeyear3, '.')
+
 
 # Saving to CSV
 cleandata.to_csv('output/cleandata.csv')

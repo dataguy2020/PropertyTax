@@ -218,6 +218,7 @@ cleandata["year3paytest"] = cleandata.apply(lambda x: semiannualpayments(x["owne
                                             axis=1)
 #cleandata["year3pay1"] = cleandata["year3paytest"][0][0]
 #cleandata["year3pay2"] = cleandata["year3paytest"][0][1]
+#TODO:enter semiannualpayments in clendadata df
 
 townhomes = cleandata.copy()
 townhomes.drop(townhomes[townhomes['housetype'] == "SF"].index, inplace=True)
@@ -233,6 +234,7 @@ overallminimumchange = cleandata['totalchange'].min()
 overallmaximumchange = cleandata['totalchange'].max()
 overallminimumchange = "${:,.2f}".format(overallminimumchange)
 overallmaximumchange = "${:,.2f}".format(overallmaximumchange)
+print ('')
 print('The average home assessment change in Tanyard Springs is ', overallaveragechange, ' and ranges from ',
       overallminimumchange, ' and ', overallmaximumchange)
 
@@ -244,6 +246,7 @@ townhouseminimumchange = townhomes['totalchange'].min()
 townhousemaximumchange = townhomes['totalchange'].max()
 townhouseminimumchange = "${:,.2f}".format(townhouseminimumchange)
 townhousemaximumchange = "${:,.2f}".format(townhousemaximumchange)
+print ('')
 print('The average TownHome assessment change in Tanyard Springs is ', townhomesaveragechange, ' and ranges from ',
       townhouseminimumchange, ' and ', townhousemaximumchange)
 
@@ -255,6 +258,7 @@ singlefamilyminimumchange = singlefamily['totalchange'].min()
 singlefamilymaximumchange = singlefamily['totalchange'].max()
 singlefamilyminimumchange = "${:,.2f}".format(singlefamilyminimumchange)
 singlefamilymaximumchange = "${:,.2f}".format(singlefamilymaximumchange)
+print ('')
 print('The average SFH assessment change in Tanyard Springs is ', singlefamilyaveragechange, ' and ranges from ',
       singlefamilyminimumchange, ' and ', singlefamilymaximumchange)
 
@@ -281,17 +285,33 @@ cleandata["totalchange"] = cleandata["totalchange"].apply(
     lambda x: format_currency(x, currency="USD", locale="en_US"))
 
 
+import locale
+locale.setlocale( locale.LC_ALL, 'English_United States.1252' )
+
 townhomeyear1 = townhomes['year1total'].sum()
+townhomeyear1 = locale.currency( townhomeyear1, grouping = True )
 townhomeyear2 = townhomes['year2total'].sum()
+townhomeyear2 = locale.currency( townhomeyear2, grouping = True )
 townhomeyear3 = townhomes['year3total'].sum()
+townhomeyear3 = locale.currency( townhomeyear3, grouping = True )
 singlefamilyyear1  = singlefamily['year1total'].sum()
+singlefamilyyear1 = locale.currency( singlefamilyyear1, grouping = True )
+singlefamilyyear2 = singlefamily['year2total'].sum()
+singlefamilyyear2 = locale.currency( singlefamilyyear2, grouping = True )
+singlefamilyyear3 = singlefamily['year3total'].sum()
+singlefamilyyear3 = locale.currency( singlefamilyyear3, grouping = True )
 
 print('The average TownHome assessment change in Tanyard Springs is ', townhomesaveragechange, ' and ranges from ',
       townhouseminimumchange, ' and ', townhousemaximumchange)
-
-print ('The townhome total year 1 is ',townhomeyear1, '.')
-print ('The townhome total year 2 is ',townhomeyear2, '.')
-print ('The townhome total year 3 is ',townhomeyear3, '.')
+print ('')
+print ('')
+print ('The townhome total year 1 is ',townhomeyear1)
+print ('The townhome total year 2 is ',townhomeyear2)
+print ('The townhome total year 3 is ',townhomeyear3)
+print ('')
+print ('The single family total year 1 is ',singlefamilyyear1)
+print ('The single family total year 2 is ',singlefamilyyear2)
+print ('The single family total year 3 is ',singlefamilyyear3)
 
 
 # Saving to CSV

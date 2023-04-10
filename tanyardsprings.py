@@ -214,11 +214,20 @@ cleandata['year3staterealestate'] = (cleandata['box10'] * statetaxrate) / 100
 
 cleandata["year3total"] = cleandata.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year3countyrealestate"], x["year3staterealestate"], x["year3countycredit"], x["year3statecredit"] ), axis=1)
 
-cleandata["year3paytest"] = cleandata.apply(lambda x: semiannualpayments(x["owneroccupancycode"], x["year3total"], x["county"]),
-                                            axis=1)
+from functions import semiannualpayments1
+cleandata["year3paytest"] = cleandata.apply(lambda x: semiannualpayments1(x["owneroccupancycode"], x["year3total"], x["county"]),
+                                           axis=1)
 #cleandata["year3pay1"] = cleandata["year3paytest"][0][0]
 #cleandata["year3pay2"] = cleandata["year3paytest"][0][1]
 #TODO:enter semiannualpayments in clendadata df
+
+####ADDED start
+# Get the columns you want to pass to the function
+year3 = cleandata[["owneroccupancycode", "year3total", "county"]]
+# Apply the function
+cleandata[["year3pay1", "year3pay2"]] = year3.apply(semiannualpayments, axis=1, result_type='expand')
+####ADDED end
+
 
 townhomes = cleandata.copy()
 townhomes.drop(townhomes[townhomes['housetype'] == "SF"].index, inplace=True)

@@ -1,15 +1,16 @@
-def semiannualpayments (row):
-    owneroccupied, totalpayment, county = row  # Unpack the values from the row
+def semiannualpayments1 (owneroccupied, totalpayment, county):
     if (county == "ANNE"):
-        from interest import anneinterest  # Put all imports at the top of the module.  anneinterest not used
+        from interest import anneinterest
         if (owneroccupied == "Yes"):
             paymentone = totalpayment / 2
             paymenttwo = totalpayment - paymentone
             paymenttwo = (paymenttwo * (interestrate(county))) + paymenttwo
+            return paymentone, paymenttwo
         else:
             paymentone = totalpayment
             paymenttwo = 0
+            return paymentone, paymenttwo
     else:
         paymentone = 0
         paymenttwo = 0
-    return paymentone, paymenttwo
+        return paymentone, paymenttwo

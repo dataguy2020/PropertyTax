@@ -9,12 +9,14 @@ import datetime as dt
 from auth import applicationtoken
 from babel.numbers import format_currency
 # importing personal modules
-from functions import owneroccupancycondition, yearcondition, homesteadqualiticationcondition, taxcalculation, semiannualpayments
+from functions import owneroccupancycondition, yearcondition, homesteadqualiticationcondition, taxcalculation, semiannualpayments, semiannualpayments1
 from limits import statelimit, annearundelcountylimit
 from rates import statetaxrate, annearundelstormwater, annearundelsolidwaste, annearundeltaxrate
 import pandas as pd
 import seaborn as sns
 from sodapy import Socrata
+import locale
+
 
 # Unauthenticated client only works with public data sets. Note 'None'
 # in place of application token, and no username or password:
@@ -214,12 +216,11 @@ cleandata['year3staterealestate'] = (cleandata['box10'] * statetaxrate) / 100
 
 cleandata["year3total"] = cleandata.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year3countyrealestate"], x["year3staterealestate"], x["year3countycredit"], x["year3statecredit"] ), axis=1)
 
-from functions import semiannualpayments1
+
+#TODO: Remove this call as this is only being used to verify the new function that was created
 cleandata["year3paytest"] = cleandata.apply(lambda x: semiannualpayments1(x["owneroccupancycode"], x["year3total"], x["county"]),
                                            axis=1)
-#cleandata["year3pay1"] = cleandata["year3paytest"][0][0]
-#cleandata["year3pay2"] = cleandata["year3paytest"][0][1]
-#TODO:enter semiannualpayments in clendadata df
+
 
 ####ADDED start
 # Get the columns you want to pass to the function
@@ -294,7 +295,6 @@ cleandata["totalchange"] = cleandata["totalchange"].apply(
     lambda x: format_currency(x, currency="USD", locale="en_US"))
 
 
-import locale
 locale.setlocale( locale.LC_ALL, 'English_United States.1252' )
 
 townhomeyear1 = townhomes['year1total'].sum()

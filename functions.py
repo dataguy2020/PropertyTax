@@ -71,9 +71,10 @@ def interestrate(county):
         return countyinterestrate
 
 
+#TODO: Remove semiannualpayments1 function as it is being used solely as a testing method
 def semiannualpayments1 (owneroccupied, totalpayment, county):
+    from interest import anneinterest
     if (county == "ANNE"):
-        from interest import anneinterest
         if (owneroccupied == "Yes"):
             paymentone = totalpayment / 2
             paymenttwo = totalpayment - paymentone
@@ -89,9 +90,9 @@ def semiannualpayments1 (owneroccupied, totalpayment, county):
         return paymentone, paymenttwo
 
 def semiannualpayments (row):
+    from interest import anneinterest  # Put all imports at the top of the module.  anneinterest not used
     owneroccupied, totalpayment, county = row  # Unpack the values from the row
     if (county == "ANNE"):
-        from interest import anneinterest  # Put all imports at the top of the module.  anneinterest not used
         if (owneroccupied == "Yes"):
             paymentone = totalpayment / 2
             paymenttwo = totalpayment - paymentone

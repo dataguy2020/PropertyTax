@@ -1,0 +1,5 @@
+auth==0.5.3
+Babel==2.9.1
+pandas==1.5.3
+seaborn==0.12.2
+sodapy==2.2.0

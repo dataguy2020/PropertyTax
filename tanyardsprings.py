@@ -88,6 +88,10 @@ cleandata['box10'] = pd.to_numeric(cleandata['box10'])
 # print columns & types
 # print(cleandata.dtypes)
 
+year1=cleandata['assessmentyear']
+year2=year1+1
+year3=year2+1
+
 cleandata['totalchange'] = cleandata['box7'] - cleandata['box4']
 
 # converting

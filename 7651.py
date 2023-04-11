@@ -5,8 +5,7 @@ import pandas as pd
 from limits import statelimit, annearundelcountylimit
 from rates import statetaxrate, annearundeltaxrate, annearundelsolidwaste, annearundelstormwater
 from warnings import simplefilter
-from functions import taxcalculation
-
+from functions import taxcalculation, semiannualpayments
 
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 
@@ -32,7 +31,10 @@ tanyardTH.loc[tanyardTH['year1statedifference'] > 0, 'year1statecredit'] = (tany
 # year 1 straight real estate tax payment without exempt class
 tanyardTH['year1countyrealestate'] = (tanyardTH['box8'] * annearundeltaxrate) / 100
 tanyardTH['year1staterealestate'] = (tanyardTH['box8'] * statetaxrate) / 100
-tanyardTH["year1total"] = tanyardTH.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year1countyrealestate"], x["year1staterealestate"], x["year1countycredit"], x["year1statecredit"] ), axis=1)
+tanyardTH["year1total"] = tanyardTH.apply(
+    lambda x: taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"],
+                             x["year1countyrealestate"], x["year1staterealestate"], x["year1countycredit"],
+                             x["year1statecredit"]), axis=1)
 
 # year 2 calculation
 tanyardTH['year2countylimit'] = tanyardTH['year1countylimit'] + (tanyardTH['year1countylimit'] * annearundelcountylimit)
@@ -53,7 +55,10 @@ tanyardTH.loc[tanyardTH['year2statedifference'] > 0, 'year2statecredit'] = (tany
 # year 2 straight real estate tax payment without exempt class
 tanyardTH['year2countyrealestate'] = (tanyardTH['box9'] * annearundeltaxrate) / 100
 tanyardTH['year2staterealestate'] = (tanyardTH['box9'] * statetaxrate) / 100
-tanyardTH["year2total"] = tanyardTH.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year2countyrealestate"], x["year2staterealestate"], x["year2countycredit"], x["year2statecredit"] ), axis=1)
+tanyardTH["year2total"] = tanyardTH.apply(
+    lambda x: taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"],
+                             x["year2countyrealestate"], x["year2staterealestate"], x["year2countycredit"],
+                             x["year2statecredit"]), axis=1)
 
 # year 3 calculation
 tanyardTH['year3countylimit'] = tanyardTH['year2countylimit'] + (tanyardTH['year2countylimit'] * annearundelcountylimit)
@@ -75,9 +80,16 @@ tanyardTH.loc[tanyardTH['year3statedifference'] > 0, 'year3statecredit'] = (tany
 tanyardTH['year3countyrealestate'] = (tanyardTH['box10'] * annearundeltaxrate) / 100
 tanyardTH['year3staterealestate'] = (tanyardTH['box10'] * statetaxrate) / 100
 
-tanyardTH["year3total"] = tanyardTH.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year3countyrealestate"], x["year3staterealestate"], x["year3countycredit"], x["year3statecredit"] ), axis=1)
+tanyardTH["year3total"] = tanyardTH.apply(
+    lambda x: taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"],
+                             x["year3countyrealestate"], x["year3staterealestate"], x["year3countycredit"],
+                             x["year3statecredit"]), axis=1)
+tanyardTH["year3paytest"] = tanyardTH.apply(lambda x: semiannualpayments(x["owneroccupancycode"], x["year3total"], x["county"]),
+                                            axis=1)
+tanyardTH["year3pay1"] = tanyardTH["year3paytest"][0][0]
+tanyardTH["year3pay2"] = tanyardTH["year3paytest"][0][1]
 
 # debugging
-#print(tanyardTH.dtypes)
+# print(tanyardTH.dtypes)
 print(tanyardTH)
 tanyardTH.to_csv('output/7651.csv')

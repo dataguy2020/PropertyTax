@@ -95,8 +95,8 @@ cleandata['box10'] = pd.to_numeric(cleandata['box10'])
 # print(cleandata.dtypes)
 
 year1=cleandata['assessmentyear']
-year2=year1+1
-year3=year2+1
+#year2=year1+1
+#year3=year2+1
 
 cleandata['totalchange'] = cleandata['box7'] - cleandata['box4']
 
@@ -152,7 +152,7 @@ print(cleandata['housetype'].value_counts())
 print(cleandata['owneroccupancycode'].value_counts())
 
 # Debugging to see when homes were built
-print(cleandata['yearbuilt'].value_counts().sort_index(0))
+print(cleandata['yearbuilt'].value_counts())
 
 
 # year 1 calculation

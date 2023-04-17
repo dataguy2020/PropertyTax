@@ -16,6 +16,12 @@ import pandas as pd
 import seaborn as sns
 from sodapy import Socrata
 import locale
+import platform
+
+os=(platform.system())
+
+locale.setlocale(locale.LC_ALL, '')
+
 
 
 # Unauthenticated client only works with public data sets. Note 'None'
@@ -298,8 +304,6 @@ cleandata["box10"] = cleandata["box10"].apply(
 cleandata["totalchange"] = cleandata["totalchange"].apply(
     lambda x: format_currency(x, currency="USD", locale="en_US"))
 
-
-locale.setlocale( locale.LC_ALL, 'English_United States.1252' )
 
 townhomeyear1 = townhomes['year1total'].sum()
 townhomeyear1 = locale.currency( townhomeyear1, grouping = True )

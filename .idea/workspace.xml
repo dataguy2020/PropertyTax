@@ -6,7 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="dc1b9e3b-9e5e-4658-b1d4-bace61a9b1de" name="Changes" comment="updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/output/results_df.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/results_df.csv" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/output/cleandata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/cleandata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/results_df.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/results_df.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/singlefamily.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/singlefamily.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/townhomes.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/townhomes.csv" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/tanyardsprings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tanyardsprings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

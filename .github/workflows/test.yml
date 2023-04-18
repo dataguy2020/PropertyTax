@@ -1,8 +1,10 @@
 name: run 7651.py
 
-on:
-  schedule:
-    - cron: '0 0 * * 1' # At 00:00 on Monday
+#on:
+#  schedule:
+#    - cron: '0 0 * * 1' # At 00:00 on Monday
+on: push
+
 
 jobs:
   build:

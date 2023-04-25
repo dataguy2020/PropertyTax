@@ -12,7 +12,7 @@ simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 tanyardTH = pd.read_csv('test/7651b.csv')
 
 year1=tanyardTH['assessmentyear']
-year2=year2+1
+year2=year1+1
 year3=year2+1
 
 # year 1 calculation

@@ -80,14 +80,20 @@ tanyardTH.loc[tanyardTH['year3statedifference'] > 0, 'year3statecredit'] = (tany
 tanyardTH['year3countyrealestate'] = (tanyardTH['box10'] * annearundeltaxrate) / 100
 tanyardTH['year3staterealestate'] = (tanyardTH['box10'] * statetaxrate) / 100
 
-tanyardTH["year3total"] = tanyardTH.apply(
-    lambda x: taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"],
-                             x["year3countyrealestate"], x["year3staterealestate"], x["year3countycredit"],
-                             x["year3statecredit"]), axis=1)
-tanyardTH["year3paytest"] = tanyardTH.apply(lambda x: semiannualpayments1(x["owneroccupancycode"], x["year3total"], x["county"]),
-                                            axis=1)
-tanyardTH["year3pay1"] = tanyardTH["year3paytest"][0][0]
-tanyardTH["year3pay2"] = tanyardTH["year3paytest"][0][1]
+tanyardTH["year3total"] = tanyardTH.apply(lambda x : taxcalculation(x["owneroccupancycode"], x["homesteadcreditqualificationcode"], x["exemptclass"], x["year3countyrealestate"], x["year3staterealestate"], x["year3countycredit"], x["year3statecredit"] ), axis=1)
+
+
+#TODO: Remove this call as this is only being used to verify the new function that was created
+#tanyardTH["year3paytest"] = tanyardTH.apply(lambda x: semiannualpayments1(x["owneroccupancycode"], x["year3total"], x["county"]),
+#                                          axis=1)
+
+
+####ADDED start
+# Get the columns you want to pass to the function
+year3 = tanyardTH[["owneroccupancycode", "year3total", "county"]]
+# Apply the function
+tanyardTH[["year3pay1", "year3pay2"]] = year3.apply(semiannualpayments, axis=1, result_type='expand')
+####ADDED end
 
 # debugging
 # print(tanyardTH.dtypes)

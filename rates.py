@@ -2,10 +2,11 @@
 statetaxrate = 0.1120
 
 #anne arundel county rates
-#New Proposed for FY24 superceeds this - annearundeltaxrate = .93300
-annearundeltaxrate = .98000
-annearundelsolidwaste = 341
+annearundeltaxrate = .977
+annearundelsolidwaste = 426
 annearundelstormwater = 35.70
+
+#TODO: the annearundelstormwater fee is based on various factors. This is just one rate for a particular set of homes
 
 annapoliscountyrate = 0.559000
 annapolisrate = 0.738000

@@ -10,10 +10,10 @@ This project is not affiliated with the State of Maryland or any of its 24 juris
 * Update to work with the FY26 data
 * Update to work with the FY27 data
 
-#TO DO CLENAUP
+# TO DO CLENAUP
 * Clean- up functions
 
-#TO DO EXPANSION PLAN 1
+# TO DO EXPANSION PLAN 1
 * Calculate property taxes that are due in a annual payment setup
 * Calculate property taxes that are due in a semi annual payment setup
 
